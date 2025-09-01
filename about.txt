@@ -1,0 +1,6 @@
+MY name is savu.Tarunkumar
+I'm pursuing 3rd year BCA in KAKINADA SRI ADITYA DEGREE COLLEGE
+I had Learned for Github
+   1.That is how to login/signup to github
+   2.How to create respostry
+   3.How to upload file form any computer
