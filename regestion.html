@@ -1,0 +1,987 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - aditya degree College Fest</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Main content */
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Card styles */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            text-align: center;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .error {
+            border-color: #e74c3c !important;
+            background-color: #fdf2f2 !important;
+        }
+
+        .field-error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Competition selection */
+        .competitions-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #dee2e6;
+        }
+
+        .competitions-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .competitions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .competition-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .competition-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .competition-item.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+            transform: scale(1.02);
+        }
+
+        .competition-item label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .competition-item label > div {
+            flex: 1;
+            margin-left: 0.8rem;
+        }
+
+        .competition-checkbox {
+            margin-top: 0.2rem;
+            transform: scale(1.3);
+            accent-color: #667eea;
+        }
+
+        .competition-item strong {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .competition-item p {
+            margin: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .competition-item small {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .competition-item.selected small {
+            color: #ffd700 !important;
+        }
+
+        .selected-topic {
+            margin-top: 0.8rem;
+            padding: 0.5rem 0.8rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* Topic selection modal */
+        .topic-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f1f3f4;
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: #333;
+            background: #f1f3f4;
+        }
+
+        .topic-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .topic-option {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-option:hover {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .topic-option.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .topic-option input[type="radio"] {
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            transform: scale(1.3);
+            accent-color: #667eea;
+        }
+
+        .topic-option strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-option p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alert messages */
+        .alert {
+            padding: 12px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 0 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .form-title {
+                font-size: 2rem;
+            }
+            
+            .competitions-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .topic-option {
+                padding: 1rem;
+            }
+            
+            .competitions-title {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🎓 College Fest</h1>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/admin/login">Admin</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="form-container">
+                <div class="card">
+                    <h1 class="form-title">🎓 Student Registration</h1>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+                        Fill out the form below to register for the competitions
+                    </p>
+
+                    <form id="registrationForm" method="POST" action="/register" novalidate>
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px solid #667eea; padding-bottom: 0.5rem;">
+                                👤 Personal Information
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="full_name">Full Name *</label>
+                                    <input type="text" id="full_name" name="full_name" required 
+                                           placeholder="Enter your full name" maxlength="50">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="suc_code">SUC Code *</label>
+                                    <input type="text" id="suc_code" name="suc_code" required 
+                                           placeholder="e.g., SUC123456" maxlength="12" style="text-transform: uppercase;">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="year">Year *</label>
+                                    <select id="year" name="year" required>
+                                        <option value="">Select Year</option>
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="roll_no">Roll Number *</label>
+                                    <input type="text" id="roll_no" name="roll_no" required 
+                                           placeholder="e.g., 21CS001" maxlength="15" style="text-transform: uppercase;">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="section">Section *</label>
+                                    <input type="text" id="section" name="section" required 
+                                           placeholder="e.g., A" maxlength="1" style="text-transform: uppercase;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Competition Selection -->
+                        <div class="form-section">
+                            <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px solid #667eea; padding-bottom: 0.5rem;">
+                                🏆 Competition Selection
+                            </h3>
+                            
+                            <div class="competitions-section">
+                                <div class="competitions-title">
+                                    Select competitions you want to participate in:
+                                    <span id="competitionCount" style="font-size: 1rem; color: #667eea; font-weight: normal;">Selected: 0</span>
+                                </div>
+                                
+                                <div class="competitions-grid">
+                                    <!-- PPT Presentation -->
+                                    <div class="competition-item">
+                                        <label>
+                                            <input type="checkbox" name="competitions" value="ppt_presentation" class="competition-checkbox">
+                                            <div>
+                                                <strong>📊 PPT Presentation</strong>
+                                                <p>Present your ideas on tech topics</p>
+                                                <small style="color: #666;">Topics will be selected after checking this option</small>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <!-- Poster Presentation -->
+                                    <div class="competition-item">
+                                        <label>
+                                            <input type="checkbox" name="competitions" value="poster_presentation" class="competition-checkbox">
+                                            <div>
+                                                <strong>🎨 Poster Presentation</strong>
+                                                <p>Create visual presentations</p>
+                                                <small style="color: #666;">Topics will be selected after checking this option</small>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <!-- CodeWar -->
+                                    <div class="competition-item">
+                                        <label>
+                                            <input type="checkbox" name="competitions" value="codewar" class="competition-checkbox">
+                                            <div>
+                                                <strong>💻 CodeWar</strong>
+                                                <p>Programming competition</p>
+                                                <small style="color: #666;">Algorithm and problem-solving challenges</small>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <!-- Tech Debate -->
+                                    <div class="competition-item">
+                                        <label>
+                                            <input type="checkbox" name="competitions" value="tech_debate" class="competition-checkbox">
+                                            <div>
+                                                <strong>🗣 Tech Debate</strong>
+                                                <p>Technical debate competition</p>
+                                                <small style="color: #666;">Engage in tech discussions</small>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <!-- Quiz -->
+                                    <div class="competition-item">
+                                        <label>
+                                            <input type="checkbox" name="competitions" value="quiz" class="competition-checkbox">
+                                            <div>
+                                                <strong>🧠 Quiz</strong>
+                                                <p>Technical quiz competition</p>
+                                                <small style="color: #666;">Test your tech knowledge</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                                🚀 Register for College Fest
+                            </button>
+                        </div>
+
+                        <!-- Hidden inputs for topics -->
+                        <input type="hidden" name="ppt_topic" id="ppt_topic">
+                        <input type="hidden" name="poster_topic" id="poster_topic">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PPT Topics Modal -->
+    <div id="ppt_presentationModal" class="topic-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📊 Select PPT Presentation Topic</h3>
+                <button type="button" class="close-modal">&times;</button>
+            </div>
+            <div class="topic-options">
+                <div class="topic-option" onclick="selectTopic('ppt_presentation', 'prompt_engineering', 'Prompt Engineering')">
+                    <input type="radio" name="ppt_presentation_topic" value="prompt_engineering">
+                    <div>
+                        <strong>Prompt Engineering</strong>
+                        <p>Art and science of crafting effective AI prompts</p>
+                    </div>
+                </div>
+                <div class="topic-option" onclick="selectTopic('ppt_presentation', 'product_vs_service', 'Product Based vs Service Based Companies')">
+                    <input type="radio" name="ppt_presentation_topic" value="product_vs_service">
+                    <div>
+                        <strong>Product vs Service Based Companies</strong>
+                        <p>Comparison of different business models in tech</p>
+                    </div>
+                </div>
+                <div class="topic-option" onclick="selectTopic('ppt_presentation', 'cloud_computing_aws', 'Cloud Computing on AWS')">
+                    <input type="radio" name="ppt_presentation_topic" value="cloud_computing_aws">
+                    <div>
+                        <strong>Cloud Computing on AWS</strong>
+                        <p>Amazon Web Services and cloud technologies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Poster Topics Modal -->
+    <div id="poster_presentationModal" class="topic-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎨 Select Poster Presentation Topic</h3>
+                <button type="button" class="close-modal">&times;</button>
+            </div>
+            <div class="topic-options">
+                <div class="topic-option" onclick="selectTopic('poster_presentation', 'machine_learning', 'Machine Learning')">
+                    <input type="radio" name="poster_presentation_topic" value="machine_learning">
+                    <div>
+                        <strong>Machine Learning</strong>
+                        <p>AI algorithms and intelligent systems</p>
+                    </div>
+                </div>
+                <div class="topic-option" onclick="selectTopic('poster_presentation', 'ar_vr', 'AR/VR Technologies')">
+                    <input type="radio" name="poster_presentation_topic" value="ar_vr">
+                    <div>
+                        <strong>AR/VR Technologies</strong>
+                        <p>Augmented and Virtual Reality applications</p>
+                    </div>
+                </div>
+                <div class="topic-option" onclick="selectTopic('poster_presentation', 'blockchain', 'Blockchain Technology')">
+                    <input type="radio" name="poster_presentation_topic" value="blockchain">
+                    <div>
+                        <strong>Blockchain</strong>
+                        <p>Distributed ledger and cryptocurrency tech</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Main JavaScript for Registration Form
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing form handlers...');
+            initializeFormHandlers();
+            initializeTopicModals();
+        });
+
+        function initializeFormHandlers() {
+            console.log('Initializing form handlers...');
+            
+            const competitionCheckboxes = document.querySelectorAll('input[name="competitions"]');
+            console.log('Found competition checkboxes:', competitionCheckboxes.length);
+            
+            competitionCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function(e) {
+                    console.log('Competition checkbox changed:', e.target.value, e.target.checked);
+                    
+                    const competitionCode = e.target.value;
+                    const competitionItem = e.target.closest('.competition-item');
+                    
+                    if (e.target.checked) {
+                        competitionItem.classList.add('selected');
+                        
+                        // Show topic modal for competitions that have topics
+                        if (competitionCode === 'ppt_presentation' || competitionCode === 'poster_presentation') {
+                            setTimeout(() => {
+                                console.log('Showing topic modal for:', competitionCode);
+                                showTopicModal(competitionCode);
+                            }, 200);
+                        }
+                    } else {
+                        competitionItem.classList.remove('selected');
+                        
+                        // Clear topic selection
+                        const topicInput = document.getElementById(competitionCode.replace('_presentation', '') + '_topic');
+                        if (topicInput) {
+                            topicInput.value = '';
+                            console.log('Cleared topic for:', competitionCode);
+                        }
+                        
+                        // Remove topic display
+                        const topicDisplay = competitionItem.querySelector('.selected-topic');
+                        if (topicDisplay) {
+                            topicDisplay.remove();
+                        }
+                    }
+                    
+                    updateCompetitionCount();
+                });
+            });
+
+            // Form submission handler
+            const form = document.getElementById('registrationForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    console.log('Form submission started...');
+                    
+                    if (!validateForm()) {
+                        console.log('Form validation failed');
+                        e.preventDefault();
+                        return false;
+                    }
+                    
+                    console.log('Form validation passed, submitting...');
+                    
+                    // Show loading state
+                    const submitBtn = document.getElementById('submitBtn');
+                    submitBtn.innerHTML = '<span class="spinner"></span> Registering...';
+                    submitBtn.disabled = true;
+                    
+                    // Let form submit naturally
+                    return true;
+                });
+            }
+        }
+
+        function initializeTopicModals() {
+            console.log('Initializing topic modals...');
+            
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('topic-modal')) {
+                    closeTopicModal();
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeTopicModal();
+                }
+            });
+            
+            // Close button handlers
+            const closeButtons = document.querySelectorAll('.close-modal');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', closeTopicModal);
+            });
+        }
+
+        function showTopicModal(competitionCode) {
+            console.log('Attempting to show modal for:', competitionCode);
+            const modal = document.getElementById(${competitionCode}Modal);
+            
+            if (modal) {
+                console.log('Modal found, showing...');
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Focus first topic option
+                const firstTopic = modal.querySelector('input[type="radio"]');
+                if (firstTopic) {
+                    firstTopic.focus();
+                }
+            } else {
+                console.error('Modal not found for competition:', competitionCode);
+            }
+        }
+
+        function closeTopicModal() {
+            console.log('Closing topic modals...');
+            const modals = document.querySelectorAll('.topic-modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.body.style.overflow = '';
+        }
+
+        function selectTopic(competitionCode, topicCode, topicName) {
+            console.log('Topic selected:', competitionCode, topicCode, topicName);
+            
+            // Update hidden input
+            const hiddenInput = document.getElementById(competitionCode.replace('_presentation', '') + '_topic');
+            if (hiddenInput) {
+                hiddenInput.value = topicCode;
+                console.log('Updated hidden input:', hiddenInput.id, '=', hiddenInput.value);
+            }
+            
+            // Update UI to show selected topic
+            const competitionCheckbox = document.querySelector(input[value="${competitionCode}"]);
+            const competitionItem = competitionCheckbox.closest('.competition-item');
+            
+            // Remove existing topic display
+            const existingTopic = competitionItem.querySelector('.selected-topic');
+            if (existingTopic) {
+                existingTopic.remove();
+            }
+            
+            // Add new topic display
+            const topicDisplay = document.createElement('div');
+            topicDisplay.className = 'selected-topic';
+            topicDisplay.innerHTML = <small style="color: #ffd700; font-weight: 600;">Selected: ${topicName}</small>;
+            competitionItem.querySelector('label > div').appendChild(topicDisplay);
+            
+            // Update radio button selection in modal
+            const radioButton = document.querySelector(input[name="${competitionCode}_topic"][value="${topicCode}"]);
+            if (radioButton) {
+                radioButton.checked = true;
+            }
+            
+            // Close modal
+            closeTopicModal();
+        }
+
+        function updateCompetitionCount() {
+            const selectedCompetitions = document.querySelectorAll('input[name="competitions"]:checked');
+            const countDisplay = document.getElementById('competitionCount');
+            
+            if (countDisplay) {
+                countDisplay.innerHTML = Selected: <strong>${selectedCompetitions.length}</strong>;
+            }
+            
+            console.log('Competition count updated:', selectedCompetitions.length);
+        }
+
+        function validateForm() {
+            console.log('Starting form validation...');
+            let isValid = true;
+            
+            // Clear previous error messages
+            document.querySelectorAll('.field-error').forEach(error => error.remove());
+            document.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+            
+            // Check required fields
+            const requiredFields = document.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    showError(field, 'This field is required');
+                    isValid = false;
+                }
+            });
+            
+            // Check if at least one competition is selected
+            const competitions = document.querySelectorAll('input[name="competitions"]:checked');
+            if (competitions.length === 0) {
+                showAlert('Please select at least one competition!', 'error');
+                isValid = false;
+            }
+            
+            // Check if topics are selected for competitions that require them
+            competitions.forEach(comp => {
+                const competitionCode = comp.value;
+                if (competitionCode === 'ppt_presentation') {
+                    const pptTopic = document.getElementById('ppt_topic').value;
+                    if (!pptTopic) {
+                        showAlert('Please select a topic for PPT Presentation!', 'error');
+                        isValid = false;
+                    }
+                } else if (competitionCode === 'poster_presentation') {
+                    const posterTopic = document.getElementById('poster_topic').value;
+                    if (!posterTopic) {
+                        showAlert('Please select a topic for Poster Presentation!', 'error');
+                        isValid = false;
+                    }
+                }
+            });
+            
+            console.log('Form validation result:', isValid);
+            return isValid;
+        }
+
+        function showError(field, message) {
+            field.classList.add('error');
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'field-error';
+            errorDiv.textContent = message;
+            
+            field.parentNode.appendChild(errorDiv);
+        }
+
+        function showAlert(message, type) {
+            // Remove existing alerts
+            document.querySelectorAll('.alert').forEach(alert => alert.remove());
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = alert alert-${type};
+            alertDiv.textContent = message;
+            
+            const form = document.querySelector('form');
+            if (form) {
+                form.parentNode.insertBefore(alertDiv, form);
+            }
+            
+            // Auto-hide alert after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Input formatters
+        document.getElementById('suc_code').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        document.getElementById('roll_no').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        document.getElementById('section').addEventListener('input', function(e) {
+            const value = e.target.value.toUpperCase();
+            if (value.length > 1) {
+                e.target.value = value.charAt(0);
+            } else {
+                e.target.value = value;
+            }
+        });
+
+        // Debug function to check form data before submission
+        window.debugFormData = function() {
+            const formData = new FormData(document.getElementById('registrationForm'));
+            console.log('=== FORM DATA DEBUG ===');
+            for (let [key, value] of formData.entries()) {
+                console.log(key, ':', value);
+            }
+            console.log('=== END FORM DATA ===');
+        };
+
+        // Global functions for modal interaction
+        window.showTopicModal = showTopicModal;
+        window.closeTopicModal = closeTopicModal;
+        window.selectTopic = selectTopic;
+    </script>
+</body>
+</html>
